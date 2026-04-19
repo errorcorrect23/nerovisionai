@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroScan AI | Diagnostic Dashboard</title>
+    <!-- Modern Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Mockup Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="hero-brain-bg"></div>
+    
+    <div class="app-window">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <i class="fa-solid fa-brain"></i>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item"><i class="fa-solid fa-border-all"></i></a>
+                <a href="#" class="nav-item active"><i class="fa-solid fa-microchip"></i></a>
+                <a href="#" class="nav-item"><i class="fa-solid fa-user-doctor"></i></a>
+                <a href="#" class="nav-item"><i class="fa-solid fa-layer-group"></i></a>
+                <a href="#" class="nav-item"><i class="fa-solid fa-chart-line"></i></a>
+            </nav>
+            <div style="margin-top:auto; margin-bottom:20px;">
+                <a href="#" class="nav-item"><i class="fa-solid fa-gear"></i></a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-wrapper">
+            <!-- Header -->
+            <header class="app-header">
+                <div class="header-title">
+                    <h2>NeuroScan AI</h2>
+                    <span>Brain MRI Analyzer</span>
+                </div>
+                <nav class="top-nav">
+                    <a href="#" class="active">Dashboard</a>
+                    <a href="#">Scans</a>
+                    <a href="#">Analysis</a>
+                    <a href="#">Patients</a>
+                    <a href="#">Reports</a>
+                </nav>
+                <div class="header-actions">
+                    <i class="fa-solid fa-gear"></i>
+                    <i class="fa-regular fa-bell"></i>
+                    <div class="user-profile"><i class="fa-solid fa-user"></i></div>
+                </div>
+            </header>
+
+            <!-- 3-Column Layout from UI Design -->
+            <div class="dashboard-grid">
+                
+                <!-- COLUMN 1: List and Upload -->
+                <div class="col-left">
+                    <div class="panel upload-panel" id="uploadArea">
+                        <h3 style="text-align:center;">Upload & Analyze Scan</h3>
+                        <div class="upload-btn-container">
+                            <input type="file" id="fileInput" accept="image/jpeg, image/png">
+                            <button class="gradient-btn"><i class="fa-solid fa-arrow-up-from-bracket"></i> Upload Brain MRI Scan</button>
+                        </div>
+                        <div class="upload-icons">
+                            <span><i class="fa-solid fa-file-image"></i> DICOM</span>
+                            <span><i class="fa-solid fa-file-medical"></i> PNG</span>
+                        </div>
+                        <p class="status-text" id="uploadStatusText">Awaiting Scan...</p>
+                        
+                        <div id="loading" class="loader-container" style="display:none;">
+                            <div class="spinner"></div>
+                            <p style="color:var(--text-secondary); font-size: 13px;">Analyzing Model...</p>
+                        </div>
+                    </div>
+
+                    <div class="panel list-panel">
+                        <div class="panel-header">
+                            <h3>Scan List</h3>
+                            <i class="fa-solid fa-arrow-down-up-across-line"></i>
+                        </div>
+                        <div class="patient-list">
+                            <div class="patient-card active">
+                                <div class="patient-info">
+                                    <h4>Patient: <span>Eleanor Vance</span></h4>
+                                    <p>ID: NS84920 <span class="status-dot"></span> Complete</p>
+                                </div>
+                                <button class="outline-btn">Analysis</button>
+                            </div>
+                            <div class="patient-card">
+                                <div class="patient-info">
+                                    <h4>Patient: <span>Mara Varser</span></h4>
+                                    <p>ID: NS84921 <span class="status-dot"></span> Complete</p>
+                                </div>
+                                <button class="icon-btn"><i class="fa-solid fa-ellipsis"></i></button>
+                            </div>
+                             <div class="patient-card">
+                                <div class="patient-info">
+                                    <h4>Patient: <span>Ethig Hern</span></h4>
+                                    <p>ID: NS84922 <span class="status-dot"></span> Complete</p>
+                                </div>
+                                <button class="outline-btn">Analysis</button>
+                            </div>
+                            <div class="patient-card">
+                                <div class="patient-info">
+                                    <h4>Patient: <span>Assn Smith</span></h4>
+                                    <p>ID: NS84923 <span class="status-dot"></span> Complete</p>
+                                </div>
+                                <button class="outline-btn">Analysis</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- COLUMN 2: Viewer and Insights -->
+                <div class="col-center">
+                    <div class="panel-header-inline">
+                        <h3>Scan Analysis: <span>Eleanor Vance - MRI axial T2</span></h3>
+                        <div class="actions">
+                            <button><i class="fa-solid fa-expand"></i></button>
+                            <button><i class="fa-solid fa-ellipsis"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="images-container">
+                        <div class="image-box">
+                            <div class="box-header"><span>Original MRI Scan</span> <i class="fa-solid fa-xmark"></i></div>
+                            <img id="previewImage" src="https://via.placeholder.com/400x400/141b22/8b949e?text=Awaiting+Scan" alt="Original">
+                            <div class="zoom-controls">
+                                <button><i class="fa-solid fa-plus"></i></button>
+                                <button><i class="fa-solid fa-minus"></i></button>
+                            </div>
+                        </div>
+                        <div class="image-box">
+                            <div class="box-header"><span>Grad-CAM Heatmap Overlay</span> <i class="fa-solid fa-xmark"></i></div>
+                            <img id="heatmapImage" src="https://via.placeholder.com/400x400/141b22/8b949e?text=Awaiting+Analysis" alt="Heatmap">
+                            <div class="zoom-controls">
+                                <button><i class="fa-solid fa-plus"></i></button>
+                                <button><i class="fa-solid fa-minus"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel insights-panel mt-20">
+                        <div class="panel-header">
+                            <h3>Clinical Insights Panel</h3>
+                            <i class="fa-solid fa-ellipsis"></i>
+                        </div>
+                        <div class="insights-grid">
+                            <div class="insight-left">
+                                <!-- Dynamic Alert Box -->
+                                <div class="alert-box neutral" id="statusBanner">
+                                    <i class="fa-solid fa-circle-info"></i>
+                                    <span id="diagnosisLabel">Pending Analysis</span>
+                                </div>
+                                
+                                <div class="stat-block mt-20">
+                                    <p>Classification</p>
+                                    <div class="stat-value"><h4>Model Confidence</h4> <span id="confidenceBadge">0.0%</span></div>
+                                    <div class="progress-bar"><div class="progress-fill" id="confidenceBar" style="width: 0%;"></div></div>
+                                </div>
+
+                                <div class="stat-block mt-20">
+                                    <p>Anatomical Origin</p>
+                                    <h4 id="insightRegion">N/A</h4>
+                                </div>
+
+                                <div class="stat-block mt-20">
+                                    <p>Detail</p>
+                                    <h4 id="insightDesc">N/A</h4>
+                                </div>
+                            </div>
+                            
+                            <div class="insight-right">
+                                <p>Primary Brain Part</p>
+                                <h4 id="insightPart">N/A</h4>
+                                <div class="brain-graphic">
+                                    <!-- Embedded graphic placeholder for UI realism -->
+                                    <img src="https://cdn-icons-png.flaticon.com/512/3063/3063200.png" style="width: 140px; filter: invert(0.6) sepia(1) hue-rotate(150deg) opacity(0.5);" alt="brain skeleton">
+                                </div>
+                                <p>Specific Structure</p>
+                                <h4>Potential Lesion <span class="muted">(Grad-CAM focus)</span></h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- COLUMN 3: Info and Reports -->
+                <div class="col-right">
+                    <div class="panel info-panel">
+                        <h3>Patient Info</h3>
+                        <div class="info-row"><span>Name</span> <strong>Eleanor Vance</strong></div>
+                        <div class="info-row"><span>DOB</span> <strong>03/09/1987</strong></div>
+                        <div class="info-row"><span>ID</span> <strong>NS84920</strong></div>
+                    </div>
+
+                    <div class="panel info-panel mt-15">
+                        <h3>Scan Details</h3>
+                        <div class="info-row"><span>Date</span> <strong>25/05/2026</strong></div>
+                        <div class="info-row"><span>Sequence</span> <strong>Superior Axial T2</strong></div>
+                    </div>
+
+                    <div class="panel report-panel mt-15">
+                        <h3>AI Report</h3>
+                        <h4>Key findings</h4>
+                        <ul>
+                            <li id="reportL1">Awaiting scan upload to generate key anatomical findings.</li>
+                            <li id="reportL2">Anomaly presence will be verified by the neural network.</li>
+                        </ul>
+                        <h4 class="mt-15">Recommendations</h4>
+                        <ul>
+                            <li>Clinical correlation recommended.</li>
+                            <li>Review indicated heat lesion.</li>
+                        </ul>
+                        <button class="gradient-btn mt-20" id="downloadPdfBtn" style="display:none; width: 100%; box-shadow: none;">
+                            <i class="fa-solid fa-file-pdf"></i> Download PDF Report
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+    
+    <script src="main.js"></script>
+</body>
+</html>

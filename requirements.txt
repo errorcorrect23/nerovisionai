@@ -1,0 +1,12 @@
+tensorflow-cpu
+numpy
+scikit-learn
+matplotlib
+seaborn
+Pillow
+opencv-python-headless
+
+fpdf2
+fastapi
+uvicorn
+python-multipart
